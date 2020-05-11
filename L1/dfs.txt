@@ -1,0 +1,35 @@
+import time
+
+
+def get_path_DFS_ALL(neighbor_info, from_station, to_station):
+    '''
+    DFS返回所有路径，所花费时间较长
+    '''
+    result = []
+    searching_pathes = [[from_station]]
+
+    while searching_pathes:
+        path = searching_pathes.pop(-1)
+        print('path:', path)
+        froniter = path[-1]
+        print('froniter:', froniter)
+
+        for next_station in neighbor_info[froniter]:
+            if next_station in path:
+                continue
+            else:
+                new_path = path + [next_station]
+            if next_station == to_station:
+                result.append(new_path)
+                continue
+            searching_pathes.append(new_path)   #重点
+
+    return result
+
+#
+nei = {'A': ['B', 'C'],
+       'B': ['A', 'C', 'D'],
+       'C': ['A', 'B', 'D'],
+       'D': [ 'B', 'C']}
+print(get_path_DFS_ALL(nei, 'A', 'D'))
+
